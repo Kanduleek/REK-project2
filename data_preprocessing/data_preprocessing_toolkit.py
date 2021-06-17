@@ -36,7 +36,12 @@ class DataPreprocessingToolkit(object):
         return df
 
     def add_length_of_stay(self, df):
-        # Write your code here
+        # Write your code here ----- DONE
+        date_of_departure = df['date_to']
+        date_of_arrival = df['date_from']
+        number_of_nights = (date_of_departure - date_of_arrival) #Data wyjazdu - data przyjazdu
+        number_of_nights = number_of_nights.dt.days #Przeliczenie na int, tzn. na ilość dni
+        df.loc[:, 'length_of_stay'] = number_of_nights #Wypełnianie całej kolumny length_of_stay obliczonymi wartościami 
         return df
 
     def add_book_to_arrival(self, df):
@@ -56,7 +61,13 @@ class DataPreprocessingToolkit(object):
         return df
 
     def add_night_price(self, df):
-        # Write your code here
+        # Write your code here ----- DONE
+        price = df['accomodation_price']
+        length = df['length_of_stay']
+        number_of_rooms = df['n_rooms']
+        night_price = price/length/number_of_rooms #Cena nocy
+        night_price = night_price.round(2) #Cena nocy zaokrąglona do dwóch, żeby poprawnie się dodały asserty :)   
+        df.loc[:, 'night_price'] = night_price  #Wypełnianie całej kolumny night_price obliczonymi wartościami 
         return df
 
     def clip_book_to_arrival(self, df):
@@ -127,9 +138,17 @@ class DataPreprocessingToolkit(object):
         return df
 
     def map_night_price_to_room_segment_buckets(self, df):
-        # Write your code here
+        # Write your code here ----- DONE
+        night_prices = df.loc[df['accomodation_price'] > 1]\
+            .groupby('room_group_id')['night_price'].mean().reset_index()
+        night_prices.columns = ['room_group_id', 'termnight_price']
+        df = pd.merge(df, night_prices, on=['room_group_id'], how='left')
+        df['termnight_price'] = df['termnight_price'].fillna(0) #Room_segment był Nan-em bez tego
+        df.loc[:, 'room_segment'] = df['termnight_price'].apply(
+            lambda x: self.map_value_to_bucket(x, self.room_segment_buckets))
+        df = df.drop(columns=['termnight_price'])        
         return df
-
+    
     # def map_night_price_to_room_segment_buckets(self, df):
     #     night_prices = df.loc[df['accomodation_price'] > 1]\
     #         .groupby(['term', 'room_group_id'])['night_price'].mean().reset_index()
