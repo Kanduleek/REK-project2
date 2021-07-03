@@ -22,15 +22,13 @@ data/hotel_data/hotel_data_original.csv.
 ## Preparing your computer
 To be able to run this project you will need:
 - Anaconda with python v.3.8(or higher)
-- Numpy
-- Pandas
-- matplotlib.pyplot
-- seaborn
+- Numpy==1.19.5(or higher)
+- Pandas==1.2.3(or higher)
+- matplotlib.pyplot==3.3.4(or higher)
+- seaborn==0.11.1(or higher)
 - IPython.display
-- torch
-- livelossplot
-- sklearn
+- torch==1.8.0(or higher)
+- livelossplot==0.1.2(or higher)
+- MLPClassifier from sklearn library
 - random
-- hyperopt
-- traceback
-- os
+- hyperopt==0.2.5(or higher)
