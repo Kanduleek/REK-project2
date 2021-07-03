@@ -1,34 +1,97 @@
-# Recommender Systems Project 2 
+# Projekt nr 1
 
-Department of Mathematics and Computer Science, Adam Mickiewicz University, 2021
+Projekt z przedmiotu "Systemy rekomendacyjne"
 
-Authors: Klaudia Kandulska and Piotr Zioło
-
-## Project description
-
-The main goal of the project was to code a recommender based on a neural network model, then tune and evaluate it. The recommender results are compare to the results with AmazonRecommender and NetflixRecommender on HR@10 metric. The project use MLPClassifier from sklearn library to fit and compute the results.
-
-## The project constists of 
-### two Jupyter notebooks:
-project_1_data_preparation.ipynb - notebook with data preparation(copied from the 1st project),
-project_2_recommender_and_evaluation.ipynb - the main notebook for this project
-### data preprocessing code:
-data_preprocessing/data_preprocessing_toolkit.py,
-data_preprocessing/dataset_specification.py.py,
-data_preprocessing/people_identifier.py.py
-### and data:
-data/hotel_data/hotel_data_original.csv.
+Autorzy: Piotr Zioło, Klaudia Kandulska
 
 ## Preparing your computer
-To be able to run this project you will need:
-- Anaconda with python v.3.8(or higher)
-- Numpy==1.19.5(or higher)
-- Pandas==1.2.3(or higher)
-- matplotlib.pyplot==3.3.4(or higher)
-- seaborn==0.11.1(or higher)
-- IPython.display
-- torch==1.8.0(or higher)
-- livelossplot==0.1.2(or higher)
-- MLPClassifier from sklearn library
-- random
-- hyperopt==0.2.5(or higher)
+
+1. Install [Anaconda](https://www.anaconda.com/products/individual) with Python 3.8.
+
+
+2. Install [Git](https://git-scm.com/downloads).
+
+
+3. Install [PyCharm](https://www.jetbrains.com/pycharm/) (community version).
+
+
+4. Fork this repository to your GitHub account.
+
+
+5. Go to the chosen folder on your machine where you want to have a local copy of the repository. Right-click in the folder and from the context menu choose "Git Bash Here". Run the following command to clone the forked repository on your GitHub account to your local machine:
+
+	<pre>git clone <i>your_repository_address_which_you'll_find_in_your_github</i></pre>
+
+	Alternatively, open Git Bash (installed with Git), change the path to the folder where you want to have a local copy of the repository, execute the above command.
+
+
+6. Prepare your conda environment (instructions given for Windows, but it should be similar on other systems):
+
+	1. Open Anaconda Prompt as administrator.
+
+	2. Make sure you're in the repository main folder. Run the following command:
+			
+			conda env create --name rs-class-env -f environment.yml
+
+		You can replace *rs-class-env* with your own environment name.
+		
+		You may need to install a C++ compiler to install certain packages.
+
+
+7. In Git Bash open the repository folder and activate just created environment with the following command:
+
+		conda activate rs-class-env
+	
+
+8. In Git Bash type:
+
+		jupyter notebook
+
+	A new tab with Jupyter Notebook should open in your browser.
+
+
+9. In Jupyter Notebook open jupyter_test.ipynb.
+
+
+10. Click on the first cell and hit shift+enter. The first cell should get executed properly. Do the same for all other cells (you can continuously hit shift+enter until you execute all cells).
+
+	The most common error you may encounter is "ImportError: No module named...". In such a case:
+	
+	- copy the package name,
+	
+	- close the tabs with Jupyter and in Git Bash where you started Jupyter Notebook click ctrl+c,
+	
+	- run the following command:
+			pip install package_name
+			
+	- the package should get installed successfully,
+
+	- after that you can open Jupyter Notebook again and test if it works now.
+
+
+11. After you finished a piece of code in your repository, run the following commands in Git Bash (in the repository folder):
+
+		git add -A
+
+		git commit -m "Commit message"
+
+		git push
+
+	The first command adds all changes and new files for the next commit. The second command commits your changes (it's a kind of a checkpoint/save to which you can later return if need be). The third one sends your commit to GitHub (or any remote repository, in general). 
+	
+	**Convention:** For your commit messages use imperatives, e.g. "Do this, do that". Try to give informative one-liners.
+
+
+12. (Optional) Set up your Git Bash to make it look as below:
+
+	![Git Bash](img/git_bash.png)
+
+	Copy .bash_profile and git-prompt.sh files from the git_configuration folder from this repository to your user folder (tested on Windows 10; on other systems they may need to land somewhere else).
+
+
+13. (Optional) Set up SSH on your machine for easier access to your GitHub repositories through Git. You can find tutorials on the internet how to do that.
+
+	To additionally add an automatic prompt for SSH password in Git Bash, copy a script similar to .bashrc from the git_configuration folder to your user folder. In the file change the name of the key (in the given file there are two given; you can just leave one).
+
+
+**In the case of any problems, consult your best friend - [StackOverflow](https://stackoverflow.com/)**.
